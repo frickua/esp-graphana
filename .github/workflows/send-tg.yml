@@ -12,7 +12,7 @@ jobs:
       - name: Render Grafana Panel to PNG
         run: |
           curl -H "Authorization: Bearer ${{ secrets.GRAFANA_TOKEN }}" \
-          "https://frickua.grafana.net/render/d-solo/frqvfml/esp-board?orgId=1&from=now-30m&to=now&panelId=1&tz=Europe%2FKyiv" \
+          "https://frickua.grafana.net/render/d-solo/frqvfml/esp-board?orgId=1&from=now-6h&to=now&panelId=1&tz=Europe%2FKyiv" \
           --output chart.png
 
       - name: Send Image to Telegram
