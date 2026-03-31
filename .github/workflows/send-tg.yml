@@ -14,6 +14,8 @@ jobs:
       CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       GRAFANA_TOKEN: ${{ secrets.GRAFANA_TOKEN }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # ЦЕЙ КРОК ВИПРАВИТЬ ПОМИЛКУ
       - name: Render Grafana Panel to PNG
         run: |
           curl -H "Authorization: Bearer ${{ secrets.GRAFANA_TOKEN }}" \
