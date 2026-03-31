@@ -17,7 +17,7 @@ jobs:
 
       - name: Send Image to Telegram
         run: |
-          curl -v -F "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -F "photo=@chart.png" \
-          -F "caption=📊 Звіт ESP Board за останні 6 годин" \
-          "https://telegram.org{{ secrets.TELEGRAM_TOKEN }}/sendPhoto"
+          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto \
+            -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+            -F photo=@"chart.png" \
+            -F caption="📊 Звіт ESP Board за останні 6 годин"
