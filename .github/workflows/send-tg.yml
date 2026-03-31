@@ -1,0 +1,23 @@
+name: Send Grafana Graph to Telegram
+
+on:
+  workflow_dispatch: # Кнопка для ручного запуску
+#  schedule:
+#    - cron: '0 9 * * *' # Автоматично щодня о 09:00 (за UTC)
+
+jobs:
+  render_and_send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Render Grafana Panel to PNG
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.GRAFANA_TOKEN }}" \
+          "https://frickua.grafana.net/render/d-solo/frqvfml/esp-board?orgId=1&from=now-30m&to=now&panelId=1&tz=Europe%2FKyiv" \
+          --output chart.png
+
+      - name: Send Image to Telegram
+        run: |
+          curl -v -F "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -F "photo=@chart.png" \
+          -F "caption=📊 Звіт ESP Board за останні 6 годин" \
+          "https://telegram.org{{ secrets.TELEGRAM_TOKEN }}/sendPhoto"
