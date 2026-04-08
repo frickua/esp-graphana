@@ -3,7 +3,7 @@ name: Send Grafana Graph to Telegram
 on:
   workflow_dispatch: # Кнопка для ручного запуску
   schedule:
-    - cron: '0 * * * *'
+#    - cron: '0 * * * *'
 
 jobs:
   render_and_send:
